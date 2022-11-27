@@ -1,4 +1,5 @@
 
+import { omit } from 'lodash'
 import UserModel, { UserInput, UserDocument } from '../models/user.model'
 
 const createUser = async (input: UserInput) => {
@@ -9,6 +10,28 @@ const createUser = async (input: UserInput) => {
   }
 }
 
+type ValidatePasswordData = {
+  email: string,
+  password: string
+}
+
+const validatePassword = async ({ email, password }: ValidatePasswordData) => {
+  const user = await UserModel.findOne({ email })
+
+  if (!user) {
+    return false
+  }
+
+  const isValid = await user.comparePassword(password)
+
+  if (!isValid) {
+    return false
+  }
+
+  return omit(user.toJSON(), 'password')
+}
+
 export {
-  createUser
+  createUser,
+  validatePassword
 }
