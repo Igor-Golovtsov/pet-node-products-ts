@@ -1,6 +1,6 @@
 
 import { Express, Request, Response } from 'express'
-import { createUserSessionHandler, getUserSessionHandler } from './controllers/session.controller'
+import { createUserSessionHandler, deleteUserSessionHandler, getUserSessionHandler } from './controllers/session.controller'
 import { createUserHandler } from './controllers/user.controller'
 import requireUser from './middleware/requireUser'
 import validateResource from './middleware/validateResource'
@@ -16,6 +16,7 @@ const routes = (app: Express) => {
 
   app.post('/api/sessions', validateResource(createSessionSchema), createUserSessionHandler)
   app.get('/api/sessions', requireUser, getUserSessionHandler)
+  app.delete('/api/sessions', requireUser, deleteUserSessionHandler)
 }
 
 export default routes

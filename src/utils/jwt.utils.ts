@@ -17,13 +17,13 @@ const verifyJwt = (token: string) => {
     const decoded = jwt.verify(token, publicKey)
 
     return {
-      valide: true,
+      valid: true,
       expired: false,
       decoded
     }
   } catch (error: any) {
     return {
-      valide: false,
+      valid: false,
       expired: error.message === 'jwt expired',
       decoded: null
     }
