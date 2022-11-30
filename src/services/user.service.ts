@@ -1,5 +1,6 @@
 
 import { omit } from 'lodash'
+import { FilterQuery } from 'mongoose'
 import UserModel, { UserInput, UserDocument } from '../models/user.model'
 
 const createUser = async (input: UserInput) => {
@@ -8,6 +9,10 @@ const createUser = async (input: UserInput) => {
   } catch (error: any) {
     throw new Error(error)
   }
+}
+
+const findUser = async (query: FilterQuery<UserDocument>) => {
+  return UserModel.findOne(query).lean()
 }
 
 type ValidatePasswordData = {
@@ -33,5 +38,6 @@ const validatePassword = async ({ email, password }: ValidatePasswordData) => {
 
 export {
   createUser,
+  findUser,
   validatePassword
 }
