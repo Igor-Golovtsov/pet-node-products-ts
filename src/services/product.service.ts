@@ -6,16 +6,16 @@ const createProduct = async (input: DocumentDefinition<ProductInput>) => {
   return await ProductModel.create(input)
 }
 
-const findProduct = async (query: FilterQuery<ProductDocument>, options: QueryOptions = { lean: true }) => {
-  return await ProductModel.findOne(query, {}, options);
+const findProduct = (query: FilterQuery<ProductDocument>, options: QueryOptions = { lean: true }) => {
+  return ProductModel.findOne(query, {}, options);
 }
 
-const findAndUpdateProduct = async (query: FilterQuery<ProductDocument>, update: UpdateQuery<ProductDocument>, options: QueryOptions) => {
-  return await ProductModel.findOneAndUpdate(query, update, options)
+const findAndUpdateProduct = (query: FilterQuery<ProductDocument>, update: UpdateQuery<ProductDocument>, options: QueryOptions) => {
+  return ProductModel.findOneAndUpdate(query, update, options)
 }
 
-const deleteProduct = async (query: FilterQuery<ProductDocument>) => {
-  return await ProductModel.deleteOne(query)
+const deleteProduct = (query: FilterQuery<ProductDocument>) => {
+  return ProductModel.deleteOne(query)
 }
 
 export {
